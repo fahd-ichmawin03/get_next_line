@@ -6,7 +6,7 @@
 /*   By: fichmawi <fichmawi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:14:04 by fichmawi          #+#    #+#             */
-/*   Updated: 2025/11/18 15:49:36 by fichmawi         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:09:10 by fichmawi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	ft_strlen(const char *str)
 {
 	int	i;
-
+	
+	if(!str)
+		return 0;
 	i = 0;
 	while (str[i])
 		i++;
@@ -26,6 +28,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
+	if(!s)
+		return NULL;
 	i = 0;
 	while (s[i])
 	{
@@ -35,7 +39,6 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -64,7 +67,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	join[i] = '\0';
 	return (join);
 }
-
 
 void	ft_bzero(void *s, size_t n)
 {

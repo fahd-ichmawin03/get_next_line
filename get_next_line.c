@@ -6,7 +6,7 @@
 /*   By: fichmawi <fichmawi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 10:18:38 by fichmawi          #+#    #+#             */
-/*   Updated: 2025/11/18 22:24:03 by fichmawi         ###   ########.fr       */
+/*   Updated: 2025/11/24 10:45:42 by fichmawi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ char	*read_extruct(int fd, char *extruct)
 
 	if (!extruct)
 		extruct = ft_calloc(1, 1);
-	buf = malloc((BUF_SIZE + 1) * sizeof(char));
+	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (NULL);
 	octets = 1;
 	while (octets > 0)
 	{
-		octets = read(fd, buf, BUF_SIZE);
+		octets = read(fd, buf, BUFFER_SIZE);
 		if (octets == -1)
 		{
-			free (extruct);
-			free (buf);
+			free(extruct);
+			free(buf);
 			return (NULL);
 		}
 		buf[octets] = '\0';
@@ -46,7 +46,7 @@ char	*read_extruct(int fd, char *extruct)
 		if (ft_strchr(extruct, '\n') != NULL)
 			break ;
 	}
-	free (buf);
+	free(buf);
 	return (extruct);
 }
 
@@ -55,8 +55,8 @@ char	*my_line(char *extruct)
 	int		i;
 	char	*line;
 
-	if(!extruct || !extruct[0])
-		return NULL;
+	if (!extruct || !extruct[0])
+		return (NULL);
 	i = 0;
 	while (extruct[i] && extruct[i] != '\n')
 		i++;
@@ -85,7 +85,7 @@ char	*clean_extruct(char *extruct)
 		i++;
 	if (!extruct[i])
 	{
-		free (extruct);
+		free(extruct);
 		return (NULL);
 	}
 	clean = ft_calloc((ft_strlen(extruct) - i + 1), sizeof(*extruct));
@@ -95,7 +95,7 @@ char	*clean_extruct(char *extruct)
 	i++;
 	while (extruct[i])
 		clean[j++] = extruct[i++];
-	free (extruct);
+	free(extruct);
 	return (clean);
 }
 
@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*extruct;
 
-	if (fd < 0 || BUF_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	extruct = read_extruct(fd, extruct);
 	if (!extruct)
